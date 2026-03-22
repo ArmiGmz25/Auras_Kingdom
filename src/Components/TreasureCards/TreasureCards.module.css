@@ -1,0 +1,277 @@
+/* ----------------------------------------------------------------- CONTENEDOR CON FONDO (rosas y rojos contrastantes) */
+.treasure-section {
+  position: relative;
+  padding: 4rem 2rem;
+  background: radial-gradient(
+    circle at 50% 0%,
+    #fca1aa 0%,
+    /* rosa claro */ #ff9f9c 40%,
+    /* coral rosado */ #ff7c5c 80% /* rojo durazno intenso */
+  );
+  box-shadow: 0 0 25px rgba(255, 125, 90, 0.35);
+  overflow: hidden;
+}
+
+.treasure-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      40% 40% at 20% 20%,
+      rgba(255, 218, 185, 0.28),
+      transparent 60%
+    ),
+    radial-gradient(
+      45% 45% at 80% 30%,
+      rgba(255, 160, 160, 0.28),
+      transparent 65%
+    ),
+    radial-gradient(
+      50% 50% at 50% 80%,
+      rgba(255, 210, 160, 0.28),
+      transparent 65%
+    );
+  mix-blend-mode: screen;
+  filter: blur(10px);
+  z-index: 0;
+}
+
+/* ----------------------------------------------------------------- FLIP CARDS */
+
+/* Título y descripción (colores originales restaurados) */
+.treasures-title {
+  font-family: "Coiny", cursive;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  margin: 0 0 0.25rem 0;
+  color: #362361; /* color original */
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.treasures-desc {
+  font-family: "Fredoka", sans-serif;
+  text-align: center;
+  font-size: 1.1rem !important;
+  margin: 0 0 1.5rem 0;
+  color: #1b0d2c; 
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+.treasure-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  justify-items: center;
+  width: min(1200px, 95%);
+  margin: 0 auto 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Cartas */
+.flip-card {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.flip-trigger {
+  all: unset;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.flip-card:not(.is-open) .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-front {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end; 
+  padding-bottom: 1.5rem; 
+  position: relative;
+  border: 1.5px solid rgba(255, 255, 255, 0.493);
+  box-shadow: 0 0 20px rgba(255, 200, 220, 0.25);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  background: var(--img) center / contain no-repeat;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.25);
+  backface-visibility: hidden;
+  border: 1.5px solid rgba(255, 255, 255, 0.37);
+  box-shadow: 0 0 20px rgba(255, 200, 220, 0.25);
+}
+
+.flip-back {
+  transform: rotateY(180deg);
+}
+
+/* Hover */
+@media (hover: hover) and (pointer: fine) {
+  .flip-card:not(.is-open):hover .flip-card-inner {
+    transform: rotateY(170deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .treasure-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    padding: 0 1rem;
+  }
+
+  .flip-card {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 480px) {
+  .treasure-grid {
+    gap: 1rem;
+    padding: 0 1rem;
+  }
+}
+
+.Box {
+  position: relative;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  background: radial-gradient(
+    circle at 50% 0%,
+    #c5a8f5 0%,
+    #b596e7 45%,
+    #3e3ba8 90% 
+  );
+
+  overflow: hidden;
+}
+
+/* Botón de Acción */
+.btnPrimary {
+  border: 0;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: "Fredoka", sans-serif;
+  background: linear-gradient(180deg, #ffb6c1, #ff7fb3);
+  color: #2b1f4a;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.2s ease;
+}
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+.btnPrimary:active {
+  transform: translateY(0);
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: grid;
+  place-items: center;
+  z-index: 999;
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  background: linear-gradient(180deg, #5d4da1 0%, #3d2a85 60%, #2a1663 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.15); 
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 20px rgba(186, 160, 255, 0.2); 
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 70%
+  );
+  z-index: 0;
+}
+
+.modal h3 {
+  font-family: "Coiny", cursive;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+}
+
+.modal p {
+  font-family: "Fredoka", sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Centrado del botón */
+.modal button {
+  margin-top: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.btnPrimary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  alignment-baseline: baseline;
+  border: 0;
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: "Fredoka", sans-serif;
+  background: linear-gradient(180deg, #ffb6c1, #ff7fb3);
+  color: #2b1f4a;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.2s ease;
+}
+.btnPrimary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+.btnPrimary:active {
+  transform: translateY(0);
+}

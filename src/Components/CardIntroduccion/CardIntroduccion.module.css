@@ -1,0 +1,128 @@
+/* ----------------------------------------------------------------- HERO CARD */
+
+.story-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  overflow: hidden;
+  background: #e73b66;
+  max-width: 1280px;
+  border-radius: .5rem;
+  color: #fff;
+
+  border: 1.5px solid rgba(255, 255, 255, 0.493);
+  box-shadow: 0 0 20px rgba(255, 200, 220, 0.25),
+              0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.paragraph {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.1rem !important;
+  margin: 0 0 1.5rem 0;
+  color: #ffffff;  
+  opacity: .9;
+  position: relative;
+  z-index: 1;
+}
+
+.story-card p {
+  margin: .5rem;
+}
+
+.desc-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  overflow: hidden;
+  max-width: 1280px;
+  border-radius: .5rem;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.story-card img {
+  width: 40%;
+  object-fit: cover;
+}
+
+.story-card h3 {
+  font-family: 'Coiny', cursive;
+  font-size: 2rem;
+  color: #ffffff;
+  margin: 1rem;
+}
+
+.story-card p {
+  font-family: 'Fredoka', sans-serif;
+  line-height: 1.6;
+  margin: 1rem;
+}
+
+.center {
+  display: flex;
+  align-items: center;       
+  flex-direction: column;
+}
+
+
+@media (max-width: 937px) {
+  .story-card {
+    overflow: hidden;
+    flex-direction: column;  
+    text-align: center;
+  }
+
+  .story-card p {
+    text-align: left;
+  }
+
+  .desc-card {
+    max-width: 800px;
+  }
+
+  .story-card img {
+    width: 100%;           
+    max-width: 100%;
+  }
+
+  .story-card div {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .story-card {
+    overflow: hidden;
+    flex-direction: column;  
+    text-align: center;
+  }
+
+  .story-card p {
+    text-align: left;
+  }
+
+  .story-card img {
+    width: 100%;           
+    max-width: 100%;
+  }
+
+  .story-card div {
+    width: 100%;
+  }
+}
+
+
+.carouselBox {
+  position: relative;
+  padding: 4rem 2rem;
+  background: radial-gradient(
+    circle at 50% 0%,
+    #ffc4d6 0%,   
+    #f9a1b3 40%,  
+    #e86b8b 80% 
+  );
+  overflow: hidden;
+}

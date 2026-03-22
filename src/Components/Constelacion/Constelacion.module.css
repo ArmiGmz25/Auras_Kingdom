@@ -1,0 +1,82 @@
+.wrapper {
+  position: relative;
+  height: 500px !important;
+  width: 100%;                 /* AJUSTE: sin 100vw por defecto */
+  overflow: hidden;
+  border-radius: 0;
+  background: radial-gradient(circle at 50% 0%, #241e49 0%, #1b1640 30%, #341b6e 60%, #4b1d80 100%);
+  box-shadow: inset 0 10px 35px rgba(0, 0, 0, .25);
+}
+
+.fullBleed {                   /* AJUSTE: opción para ocupar todo el ancho del viewport */
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.layer {
+  position: absolute !important;
+  inset: 0;
+  z-index: 2;
+}
+
+/* Headline */
+.headline {
+  position: absolute;  /* ocupa todo el alto del contenedor */
+  inset: 0;
+  display: flex;       /* cambiamos grid → flex */
+  flex-direction: column;  /* mantiene el texto uno debajo del otro */
+  justify-content: center; /* centra verticalmente */
+  align-items: center;     /* centra horizontalmente */
+  text-align: center;      /* centra el texto dentro del contenedor */
+  pointer-events: none;
+  padding: 2rem !important;
+  gap: 3rem; /* un poco más de separación vertical */
+  z-index: 3;
+}
+
+/* Texto con gradient + fallback de color */
+.hTitle {
+  font-family: "Coiny", cursive;
+  font-size: clamp(28px, 5vw, 48px);
+  line-height: 1.1;
+  margin: 0 0 0px 0;
+  letter-spacing: 0.3px;
+
+  /* Fallback color visible aunque falle el background-clip */
+  color: #ffffff;                            /* AJUSTE: fallback */
+
+  background: linear-gradient(180deg, #ffffff 0%, #e3d2ff 60%, #9ddaff 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent;
+          color: transparent; /* sobrescrito por supports abajo si aplica */
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.20),
+    0 4px 16px rgba(156,77,255,0.16);
+}
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .hTitle { color: transparent; }           /* AJUSTE: cuando sí hay soporte, usamos el gradient */
+}
+
+.hSubtitle {
+  font-family: "Fredoka", sans-serif;
+  font-size: clamp(14px, 2.6vw, 18px);
+  color: #e8e0ff;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Reveal */
+.revealHidden { opacity: 0; transform: translateY(14px); }
+.revealVisible {
+  opacity: 1; transform: translateY(0);
+  transition: opacity 560ms ease, transform 560ms ease;
+}
+
+/* Accesibilidad: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .revealHidden, .revealVisible { transition: none !important; transform: none !important; }
+}
