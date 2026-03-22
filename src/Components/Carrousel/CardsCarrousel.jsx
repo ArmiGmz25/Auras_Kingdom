@@ -11,14 +11,14 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 // Imágenes
-import Aura from "../../assets/CARROUSEL/Aura.png";
-import Eira from "../../assets/CARROUSEL/Eira.png";
-import Eldran from "../../assets/CARROUSEL/Eldran.png";
-import Frostin from "../../assets/CARROUSEL/Frostin.png";
-import Kael from "../../assets/CARROUSEL/Kael.png";
-import Lumen from "../../assets/CARROUSEL/Lumen.png";
-import Syliph from "../../assets/CARROUSEL/Syliph.png";
-import Zephyr from "../../assets/CARROUSEL/Zephyr.png";
+import Aura from "../../assets/CARROUSEL/Aura.webp";
+import Eira from "../../assets/CARROUSEL/Eira.webp";
+import Eldran from "../../assets/CARROUSEL/Eldran.webp";
+import Frostin from "../../assets/CARROUSEL/Frostin.webp";
+import Kael from "../../assets/CARROUSEL/Kael.webp";
+import Lumen from "../../assets/CARROUSEL/Lumen.webp";
+import Syliph from "../../assets/CARROUSEL/Syliph.webp";
+import Zephyr from "../../assets/CARROUSEL/Zephyr.webp";
 
 export default function CardsCarrousel({
   title = "Personajes de la aventura",

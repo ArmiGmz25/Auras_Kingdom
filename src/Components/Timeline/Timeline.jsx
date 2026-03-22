@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./Timeline.module.css";
-import nacimientoVinculo from "../../assets/IMAGES/nacimiento-vinculo.png";
-import primerEncuentro from "../../assets/IMAGES/primer-encuentro.png";
-import monstruosAtacan from "../../assets/IMAGES/monstruos-atacan.png";
-import elegidaSalvadora from "../../assets/IMAGES/elegida.png";
+import nacimientoVinculo from "../../assets/IMAGES/nacimiento-vinculo.webp";
+import primerEncuentro from "../../assets/IMAGES/primer-encuentro.webp";
+import monstruosAtacan from "../../assets/IMAGES/monstruos-atacan.webp";
+import elegidaSalvadora from "../../assets/IMAGES/elegida.webp";
 
 export default function Timeline({
   title = "Crónicas del Reino",
@@ -52,7 +52,7 @@ export default function Timeline({
           if (e.isIntersecting) e.target.classList.add(styles.visible);
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
     nodes.forEach((n) => io.observe(n));
     return () => io.disconnect();

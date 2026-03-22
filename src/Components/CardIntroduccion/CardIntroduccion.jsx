@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CardIntroduccion.module.css";
-import AuraBattle from "../../assets/IMAGES/Aura_Battle.png";
+import AuraBattle from "../../assets/IMAGES/Aura_Battle.webp";
 
 export default function CardIntroduccion() {
   return (

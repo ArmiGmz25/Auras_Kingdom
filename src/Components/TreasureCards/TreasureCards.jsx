@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import styles from "./TreasureCards.module.css";
-
-// 📁 Imágenes
-import Espada from "../../assets/CARDS/espada.png";
-import Amuleto from "../../assets/CARDS/amuleto.png";
-import Grimorio from "../../assets/CARDS/grimorio.png";
-import Alas from "../../assets/CARDS/alas.png";
-import CardBack from "../../assets/CARDS/card_back.png";
+import Espada from "../../assets/CARDS/espada.webp";
+import Amuleto from "../../assets/CARDS/amuleto.webp";
+import Grimorio from "../../assets/CARDS/grimorio.webp";
+import Alas from "../../assets/CARDS/alas.webp";
+import CardBack from "../../assets/CARDS/card_back.webp";
 
 const CARDS = [
   {
