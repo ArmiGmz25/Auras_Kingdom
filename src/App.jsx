@@ -1,5 +1,6 @@
 // App.jsx
 import "./App.css";
+import { supabase } from "./lib/supabase";
 
 // Componentes
 import Heather from "./Components/Heather/Heather";
@@ -10,6 +11,13 @@ import Footer from "./Components/Footer/Footer";
 import Constelacion from "./Components/Constelacion/Constelacion";
 import Timeline from "./Components/Timeline/Timeline";
 
+async function testConnection() {
+  const { data, error } = await supabase.from("subscribers").select("*");
+  console.log("DATA:", data);
+  console.log("ERROR:", error);
+}
+
+testConnection();
 function App() {
   return (
     <>

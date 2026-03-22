@@ -1,30 +1,66 @@
 import { useState, useRef, useEffect } from "react";
+import { supabase } from "../../lib/supabase";
 import styles from "./Footer.module.css";
 
-export default function Footer({ onSubscribe }) {
+export default function Footer() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const dialogRef = useRef(null);
   const closeBtnRef = useRef(null);
 
   const validate = (value) => {
     if (!value || !value.trim()) return "Por favor, escribe tu correo.";
+
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    if (!re.test(value.trim()))
+    if (!re.test(value.trim())) {
       return "Escribe un correo válido (ej. nombre@dominio.com).";
+    }
+
     return "";
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const msg = validate(email);
+
+    const cleanEmail = email.trim().toLowerCase();
+    const msg = validate(cleanEmail);
     setError(msg);
+
     if (msg) return;
 
-    if (onSubscribe) onSubscribe(email.trim());
-    setOpen(true);
+    try {
+      setLoading(true);
+
+      const { error: insertError } = await supabase.from("subscribers").insert([
+        {
+          email: cleanEmail,
+          source: "footer",
+        },
+      ]);
+
+      if (insertError) {
+        console.error("Error insertando suscriptor:", insertError);
+
+        if (insertError.code === "23505") {
+          setError("Ese correo ya está suscrito.");
+          return;
+        }
+
+        setError("No se pudo registrar tu suscripción. Intenta de nuevo.");
+        return;
+      }
+
+      setEmail("");
+      setOpen(true);
+    } catch (err) {
+      console.error("Error inesperado:", err);
+      setError("Ocurrió un error inesperado. Intenta nuevamente.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleClose = () => {
@@ -35,6 +71,7 @@ export default function Footer({ onSubscribe }) {
     const onKey = (ev) => {
       if (ev.key === "Escape" && open) handleClose();
     };
+
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
   }, [open]);
@@ -52,6 +89,7 @@ export default function Footer({ onSubscribe }) {
           <h3 className={styles["ak-footer__title"]}>
             ¿Te unes a la aventura?
           </h3>
+
           <p className={styles["ak-footer__subtitle"]}>
             Suscríbete para enterarte cuando el juego avance ✨
           </p>
@@ -78,11 +116,13 @@ export default function Footer({ onSubscribe }) {
               aria-invalid={!!error}
               aria-describedby={error ? "ak-email-error" : undefined}
               required
+              disabled={loading}
             />
 
-            <button type="submit">Suscribirme</button>
+            <button type="submit" disabled={loading}>
+              {loading ? "Enviando..." : "Suscribirme"}
+            </button>
 
-            {/* Mensaje de error */}
             <span
               id="ak-email-error"
               className={styles.errorText}
@@ -98,7 +138,6 @@ export default function Footer({ onSubscribe }) {
         </div>
       </div>
 
-      {/* Modal de confirmación */}
       {open && (
         <div
           className={styles.modalOverlay}
@@ -115,9 +154,11 @@ export default function Footer({ onSubscribe }) {
             <h4 id="subscribe-title" className={styles.modalTitle}>
               ¡Suscripción registrada!
             </h4>
+
             <p id="subscribe-desc" className={styles.modalBody}>
-              Te tendremos actualizado por correo. 💌
+              Te mantendremos actualizado por correo. 💌
             </p>
+
             <div className={styles.modalActions}>
               <button
                 ref={closeBtnRef}

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Heather.module.css";
 import Logo from "../../assets/SVG/Logo.svg";
-import BgImage from "../../assets/IMAGES/bg-image.png";
+import BgImage from "../../assets/IMAGES/bg-image.webp";
 
 export default function Heather() {
   return (
